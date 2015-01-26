@@ -14,8 +14,8 @@ dependencies {
 	compile 'com.android.tools.build:gradle:1.0.1'
 }
 
-group = 'com.vv.gradle'
-version = '1.0-SNAPSHOT'
+group = 'com.vv.testy'
+version = '0.1'
 
 uploadArchives {
     repositories {
@@ -23,4 +23,9 @@ uploadArchives {
             repository(url: uri('../repo'))
         }
     }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
