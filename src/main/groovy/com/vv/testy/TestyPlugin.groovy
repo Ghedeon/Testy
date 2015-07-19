@@ -16,19 +16,19 @@
 
 package com.vv.testy
 
-import org.gradle.api.Project
-import org.gradle.api.Plugin
 import com.android.builder.testing.ConnectedDeviceProvider
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 class TestyPlugin implements Plugin<Project> {
     void apply(Project project) {
-		def DEVICES_PROPERTY = "devices"
+        def DEVICES_PROPERTY = "devices"
         ConnectedDeviceProvider.metaClass.getDevices = {
             def devices = localDevices
-            if (project.hasProperty(DEVICES_PROPERTY)){
+            if (project.hasProperty(DEVICES_PROPERTY)) {
                 def devicesSerials = project.getProperties().get(DEVICES_PROPERTY).split(/,/)
-                println("running tests on: ${devicesSerials}")
                 devices = localDevices.findAll { devicesSerials.contains(it.serialNumber) }
+                println "[testy] ${!devices.empty ? "Execute on: ${devices.collect { it.serialNumber }}" : "Devices not found"}"
             }
 
             devices
