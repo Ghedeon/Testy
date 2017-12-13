@@ -1,4 +1,4 @@
-# Testy
+# Testy [Deprecated]
 Gradle plugin that allows to run android tests on specified devices
 
 ## Usage
